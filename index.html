@@ -28,85 +28,20 @@
         </ul>
       </header>
       <section>
-        NXT
-===
+        <pre><code>$ cd your_repo_root/nxt
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
 
+<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
 
-NXT Search is a search engine which is based off of your links. You can easily sumit your own content to the database or even your company's content. NXT Search is free and open to everyone. NXT is also open sourced, meaning developers can download the NXT source code from Github.
+<h3>Authors and Contributors</h3>
 
+<p>You can contact The Creator on github (<a href="https://github.com/bossman759" class="user-mention">@bossman759</a>).</p>
 
-This repo contains the source code for NXT & examples for using .sql files from NXT.
+<h3>Support or Contact</h3>
 
-<b>Installation</b><br />
-
-<a target='_blank' href='http://www.linux.com/learn/tutorials/288158-easy-lamp-server-installation'>Source</a><br />
-
-<b>Simple Install</b><br />
-
-<code>sudo tasksel</code>
-
-<b></b>Advanced Installation</b><br />
-
-<b>Install Apache</b><br />
-    
-<code>sudo apt-get install apache2</code><br />
-
-<b>Install PHP</b><br />
-
-<code>sudo apt-get install php5 libapache2-mod-php5</code><br />
-
-When the installation is complete, restart Apache with the command:<br />
-
-sudo /etc/init.d/apache2 restart<br />
-
-Now, let's give PHP a little test to make sure it has installed. In your terminal window, create a new file called test.php.
-
-<b>Save that file and place it in /var/www/. Now, open up your browser to the address http://ADDRESS_OF_SERVER/test.php. Where ADDRESS_OF_SERVER is the actual address of your server. You should see "Test PHP Page" in the browser. You are now ready to move on to MySQL.</b>
-
-<b>Install MYSQL</b><br />
-
-<code>sudo apt-get install mysql-server</code><br />
-
-Again, depending upon your OS installation, there might be some dependencies to be installed. After the installation is complete you need to log into the MySQL prompt and give the administrative user a password. Do this by following these steps:
-
-Log into MySQL with the command mysql -u root -p.
-As no password has been configured, you will only need to hit enter when prompted for the password.
-Enter the command SET PASSWORD FOR 'root'@'localhost' = PASSWORD ('YOURPASSWORD'); Where YOURPASSWORD is the password you want to use for the administrative user.
-Now quit the MySQL prompt by issuing the command quit and hitting enter.
-Start the MySQL server with the command sudo /etc/init.d/mysql start.
-
-<b>Now fork the code from NXT</b><br />
-
-<code>$ cd your_repo_root/nxt</code><br />
-
-<code>$ git fetch origin</code><br />
-
-<code>$ git checkout gh-pages</code><br />
-
-and move it /var/www.<br />
-
-<b>Don't Forget</b><br />
-
-<b>Make sure you create a connect.php file</b><br />
-
-<code><?php</code><br />
-
-<code>$db_host = "";</code><br />
-
-<code>$db_username = ""; </code><br />
-
-<code>$db_pass = "";</code><br />
-
-<code>$db_name = "";</code><br />
-
-
-
-<code>mysql_connect("$db_host","$db_username","$db_pass") or die(mysql_error());</code><br />
-<code>mysql_select_db("$db_name");</code><br />
-<code>?></code><br />
-
-<b>Also make sure you download a copy of our NXT Data Dumps and import it into your mysql database.</b>
-
+<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/Officialnxt">Officialnxt</a></p>
