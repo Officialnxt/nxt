@@ -63,7 +63,7 @@ Start the MySQL server with the command sudo /etc/init.d/mysql start.
 
 <b>Now fork the code from NXT</b>
 
-<code>$ cd your_repo_root/nxt</code>
+<code>$ cd Officialnxt/nxt</code>
 
 <code>$ git fetch origin</code>
 
@@ -90,8 +90,8 @@ Don't Forget
 
 <code>mysql_connect("$db_host","$db_username","$db_pass") or die(mysql_error());</code>
 <code>mysql_select_db("$db_name");</code>
-a
-<code>?>
+
+<code>?></code>
 
 <b>Also make sure you download a copy of our NXT Data Dumps and import it into your mysql database.</b>
 </code>
