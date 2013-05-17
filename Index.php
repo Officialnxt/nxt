@@ -123,7 +123,7 @@
 		$html = "";
 		$url = "http://rss.cnn.com/rss/money_markets.rss";
 		$xml = simplexml_load_file($url);
-		for($i = 0; $i < 4; $i++){
+		for($i = 0; $i < 1; $i++){
 	
 			$title = $xml->channel->item[$i]->title;
 			$link = $xml->channel->item[$i]->link;
@@ -136,7 +136,40 @@
 		}
 		echo $html;
 
-		?>		
+		?>
+
+		<b>Bitcoin Exchange Rates</b><hr />
+
+		<?php
+
+		$url = 'https://blockchain.info/ticker';
+		$content = file_get_contents($url);
+		$json = json_decode($content, true);
+
+		$usd = $json['USD']['last'];
+		$cny = $json['CNY']['last'];
+		$jpy = $json['JPY']['last'];
+		$sgd = $json['SGD']['last'];
+		$hkd = $json['HKD']['last'];
+		$cad = $json['CAD']['last'];
+		$aud = $json['AUD']['last'];
+		$nzd = $json['NXD']['last'];
+		$eur = $json['EUR']['last'];
+		$rub = $json['RUB']['last'];
+
+		echo "<b>USD:</b> $usd<br />";
+		echo "<b>CNY:</b> $cny<br />";
+		echo "<b>JPY:</b> $jpy<br />";
+		echo "<b>SGD:</b> $sgd<br />";
+		echo "<b>HKD:</b> $hkd<br />";
+		echo "<b>CAD:</b> $cad<br />";
+		echo "<b>AUD:</b> $aud<br />";
+		echo "<b>NZD:</b> $nzd<br />";
+		echo "<b>EUR:</b> $eur<br />";
+		echo "<b>RUB:</b> $rub<hr />";						
+
+		?>
+	
 		</div>
       	</td>
 
