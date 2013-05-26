@@ -95,3 +95,8 @@ Don't Forget
 
 <b>Also make sure you download a copy of our NXT Data Dumps and import it into your mysql database.</b>
 </code>
+
+Donate
+===
+
+Bitcoin: 1LWddPiBeCuEhzfYpRKkuvDsin65KJ7F1u
