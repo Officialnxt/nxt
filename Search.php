@@ -1,4 +1,4 @@
-		<?php
+	<?php
 	require("connect.php");
 	$search = mysql_real_escape_string(strip_tags(stripslashes($_GET['search'])));
 	if($search){
