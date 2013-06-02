@@ -1,4 +1,4 @@
-	<?php
+		<?php
 	require("connect.php");
 	$search = mysql_real_escape_string(strip_tags(stripslashes($_GET['search'])));
 	if($search){
@@ -23,6 +23,19 @@
 				}
 			
 			}
+
+			$api = ''; // Wolfram Api ID
+			$url = "http://api.wolframalpha.com/v2/query?podindex=2&format=plaintext&appid=" . $api . "&input=" . urlencode($search); // The Url To Fetch the Result
+			$do = file_get_contents($url);
+			$answer = preg_match('/<plaintext>(.*)<\/plaintext>/i', $do, $out);
+			if ($answer){
+			    echo "<blockquote>
+			<p><h2>";
+			echo $out[1];
+			echo "</h2></p>
+			<small>Wolfram Alpha</small>
+			</blockquote><br />";
+			}
 			
 			$sql= mysql_query("SELECT * FROM Graphs WHERE name LIKE '%" . $search . "%' OR source LIKE '%" . $search  ."%'");
 			$numrows = mysql_num_rows($sql);
@@ -40,22 +53,7 @@
 				}
 			
 			}	
-			
-			$url="http://search.twitter.com/search.rss?q=$search&rpp=2&show_user=true&include_entities=true&lang=en";
-			$twitter_xml = simplexml_load_file($url); 
 
-			foreach ($twitter_xml->channel->item as $key) {
-			    $author = $key->{"author"};
-			    $date = $key->{"pubDate"};
-			    $link = $key->{"link"};
-			    $title = $key->{"title"};
-			    $g = $key->children("http://base.google.com/ns/1.0"); 
-			    $profimg = $g->{"image_link"};
-				echo"<a target='_blank' href=$link><img width=48 height=48 src=\"$profimg\"></a>
-				$title<br />
-				$date<hr />";
-			    $xml = $twitter_xml;
-			}
 
 
 			$sql= mysql_query("SELECT * FROM Links WHERE url LIKE '%" . $search . "%' OR Name LIKE '%" . $search  ."%' OR Name='$search' OR url='$search' LIMIT 12");
@@ -76,7 +74,7 @@
 				preg_match("/\<title\>(.*)\<\/title\>/",$str,$title);
 				$Title = stripslashes(strip_tags($title[1]));
 				if($Title){
-				echo "<a target='_blank' title='$name' href='http://nxt.comxa.com/$id'>$Title</a> | <a href='http://nxt.comxa.com/spam?id=$id'>Spam</a><br />";
+				echo "<img src='https://plus.google.com/_/favicon?domain=$url' class='img-polaroid'> <a target='_blank' title='$name' href='http://nxt.comxa.com/$id'>$Title</a> | <a href='http://nxt.comxa.com/spam?id=$id'>Spam</a><br />";
 				}
 				else 
 				echo "<a target='_blank' href='http://nxt.comxa.com/$id'>$name</a> | <a href='http://nxt.comxa.com/spam?id=$id'>Spam</a><br/>";
