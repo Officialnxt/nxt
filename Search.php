@@ -1,6 +1,6 @@
 	<?php
 	require("connect.php");
-	$search = mysql_real_escape_string(strip_tags(stripslashes($_GET['search'])));
+	$search = strip_tags(stripslashes($_GET['search']));
 	if($search){
 		if(preg_match("/[A-Za-z-0-9]+/", $_GET['search'])){
 			$hash = sha1(rand().microtime());
@@ -8,26 +8,11 @@
 			mysql_query("INSERT INTO History VALUES('', '$hash', '$search', '$date')");
 
 			echo "<h2>Results $search</h2>"; 
-			$sql= mysql_query("SELECT * FROM Def WHERE Word LIKE '%" . $search . "%' OR Def LIKE '%" . $search  ."%'");
-			$numrows = mysql_num_rows($sql);
-			if($numrows >= 1){
-			while($row = mysql_fetch_assoc($sql)){
 
-				$id = $row['id'];
-				$word = $row['Word'];
-				$def = $row['Def'];
-				$date = $row['Date'];	
-				echo "<b>$word</b><br />";
-				echo "$def<hr />";
-			
-				}
-			
-			}
-
-			$api = ''; // Wolfram Api ID
+			$api = 'EEPV7E-AGQVW8UJRL'; // Wolfram Api ID
 			$url = "http://api.wolframalpha.com/v2/query?podindex=2&format=plaintext&appid=" . $api . "&input=" . urlencode($search); // The Url To Fetch the Result
-			$do = file_get_contents($url);
-			$answer = preg_match('/<plaintext>(.*)<\/plaintext>/i', $do, $out);
+			$do = file_get_contents($url); // Result Stored in $do
+			$answer = preg_match('/<plaintext>(.*)<\/plaintext>/i', $do, $out); // Take out Result 
 			if ($answer){
 			    echo "<blockquote>
 			<p><h2>";
@@ -62,7 +47,7 @@
 			while($row = mysql_fetch_assoc($sql)){
 					
 				$id = $row['id'];
-				$name = $row['Name'];
+				$name = $row['name'];
 				$url = $row['url'];
 				$date = $row['date'];
 				//$tags = get_meta_tags("$url");
@@ -70,18 +55,11 @@
 				$author = $tags['author'];
 				$keywords = $tags['keywords'];
 				
-				$str = file_get_contents($url);
-				preg_match("/\<title\>(.*)\<\/title\>/",$str,$title);
-				$Title = stripslashes(strip_tags($title[1]));
-				if($Title){
-				echo "<img src='https://plus.google.com/_/favicon?domain=$url' class='img-polaroid'> <a target='_blank' title='$name' href='http://nxt.comxa.com/$id'>$Title</a> | <a href='http://nxt.comxa.com/spam?id=$id'>Spam</a><br />";
-				}
-				else 
-				echo "<a target='_blank' href='http://nxt.comxa.com/$id'>$name</a> | <a href='http://nxt.comxa.com/spam?id=$id'>Spam</a><br/>";
+	
+				echo "<img src='https://plus.google.com/_/favicon?domain=$url' class='img-polaroid'> <a target='_blank' href='$url'>$name</a> | <a href='http://localhost/spam.php?id=$id'>Spam</a><br/>";
 				    
 				
-				echo "$url<hr />";
-				//echo "$description<br />";
+				echo "<p class='muted'>$url</p><hr />";
 			
 			
 				}
