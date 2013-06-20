@@ -4,30 +4,6 @@
 	$url = mysql_real_escape_string(stripslashes(strip_tags($_POST['url'])));
 	$name = mysql_real_escape_string(stripslashes(strip_tags($_POST['name'])));
 
-	if($name){
-
-		if($url){
-
-		$ch = curl_init($url);
-		curl_setopt($ch,  CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch,  CURLOPT_HEADER, TRUE); //Include the headers
-		curl_setopt($ch,  CURLOPT_NOBODY, TRUE); //Make HEAD request
-
-		$response = curl_exec($ch);
-
-		if ( $response === false ){
-		    echo "<center><div class='alert alert-error'>Something Went Wrong!</div></center>";
-		}
-
-		//list of status codes you want to treat as valid:    
-		$validStatus = array(200, 301, 302, 303, 307);
-
-		if( !in_array(curl_getinfo($ch, CURLINFO_HTTP_CODE), $validStatus) ) {
-		    echo "<center><div class='alert alert-error'>The Url is not vaild!</div></center>";
-		}
-
-
-		curl_close($ch);
 
 		$uniqid = uniqid();
 
@@ -40,14 +16,23 @@
 		if($numrows == 0){
 
 		$date = date("M d, Y");
-			mysql_query("INSERT INTO Links VALUES('$id', '$name', '$url', '$date')");
+		$str = file_get_contents($url);
+		preg_match("/\<title\>(.*)\<\/title\>/",$str,$title);
+		$title = stripslashes(strip_tags($title[1]));
+		if($title){
+		$name = mysql_real_escape_string(stripslashes(strip_tags($title)));
+		}
+		else 
+			$name = $name;
+
+		mysql_query("INSERT INTO Links VALUES('$id', '$name', '$url', '$date')");
 
 			$sql = mysql_query("SELECT * FROM Links WHERE url='$url' AND Name='$name'");
 			$numrows = mysql_num_rows($sql);
 			if($numrows == 1){
 
 			
-				header("Location: http://nxt.comxa.com");
+				header("Location: http://localhost/");
 			}
 			else
 				echo "<center><div class='alert alert-error'>
@@ -65,23 +50,14 @@
 			</div></center>";
 
 
-		}
-		else
-			echo "<center><div class='alert alert-error'>You must submit a<br />
-			Url for this to work<br />
-			Please try adding one
-			</div></center>";
-
-	}
-	else
-		echo "<center><div class='alert alert-error'>
-		You must submit a<br />
-		Name for your url<br />
-		Please try adding one
-		</div></center>";
-
-
 	
 	}
 	
 	?>
+		<form action='' method='post'>
+	<input type='text' name='name' placeholder='Name...' maxlength='300' required><br />
+	<input type='text' name='url' placeholder='Url...' required><br />
+	<input id='submit' type='submit' name='submit' value='submit' class='successbtn'>
+	</form>
+
+	<a href='http://localhost/article.php'>Submit an Article</a><br />
