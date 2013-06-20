@@ -30,12 +30,6 @@
 	}
 	else{
 	?>
-      <form method='post'>
-	<input type='text' name='title' placeholder='Title...' required><br />
-	<textarea name='text' rows='7' placeholder='Text...' required></textarea><br />
-	<textarea name='sources' rows='5' placeholder='Sources EX: Cain, Kevin. "The Negative Effects of Facebook on Communication." Social Media Today RSS N.p., 29 June 2012...' required></textarea><br />
-	<input type='submit' name='submit' class='btn btn-success'>
-      </form>
 	<?php
 	require("connect.php");
 	$title = mysql_real_escape_string(stripslashes(strip_tags($_POST['title'])));
@@ -61,10 +55,10 @@
 			$numrows = mysql_num_rows($sql);
 			if($numrows == 1){
 
-			$url = "Http://nxt.comxa.com/article?id=$id";
+			$url = "article.php?id=$id";
 			mysql_query("INSERT INTO Links VALUES('$id', '$title', '$url', '$date')")or die(mysql_error());
 
-				header("Location: http://nxt.comxa.com");
+				header("Location: http://localhost/");
 			
 			}
 			else
@@ -97,6 +91,5 @@
 		Name for your article<br />
 		Please try adding one
 		</div></center>";
-	}
 	}
 	?>
