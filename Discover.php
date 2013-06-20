@@ -5,7 +5,7 @@
 	$randid = $row['id'];
 	$id = $_GET['id'];
 	if($id){
-	echo "<a href='http://nxt.comxa.com/discover?id=$randid' class='btn btn-success'>Discover</a> ";
+	echo "<a href='discover.php?id=$randid' class='btn btn-success'>Discover</a> ";
 	$sql = mysql_query("SELECT * FROM Links WHERE id='$id'");
 	$numrows = mysql_num_rows($sql);
 	if($numrows == 1){
@@ -16,8 +16,8 @@
 	$date = $row['date'];
 
 
-	echo "<h3><a href='http://nxt.comxa.com/$id'>$name</a></h3>";
-	
+	echo "<h3><a href='$url'>$name</a></h3>";
+
 	echo "<iframe width='100%' height='500px' src='$url'></iframe>";
 
 	echo "<div id='fb-root'></div>
@@ -35,12 +35,12 @@
 
 	}
 	else
-	echo "<div class='alert alert-error'>An error occured.</div>";
+	echo "<div class='alert alert-error'><center>An error occured.</center></div>";
 
 	}
 	else{
 
-	
+
 
 	echo "<center><h2><b>Discover</b> Somehthing New...</h2></center><br />";
 
@@ -51,7 +51,7 @@
 	$id = $row['id'];
 
 
-	echo "<a href='http://nxt.comxa.com/discover?id=$id' class='btn btn-large btn-block btn-success' type='button'>Discover</a>";
+	echo "<a href='discover.php?id=$id' class='btn btn-large btn-block btn-success' type='button'>Discover</a>";
 
 
 	}
