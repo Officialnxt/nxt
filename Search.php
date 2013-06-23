@@ -1,4 +1,4 @@
-	<?php
+		<?php
 	require("connect.php");
 	$search = strip_tags(stripslashes($_GET['search']));
 	if($search){
@@ -7,7 +7,7 @@
 			$date = date("F d, Y");
 			mysql_query("INSERT INTO History VALUES('', '$hash', '$search', '$date')");
 
-			echo "<h2>Results $search</h2>"; 
+			echo "<h2>Results For $search</h2>"; 
 
 			$api = 'EEPV7E-AGQVW8UJRL'; // Wolfram Api ID
 			$url = "http://api.wolframalpha.com/v2/query?podindex=2&format=plaintext&appid=" . $api . "&input=" . urlencode($search); // The Url To Fetch the Result
@@ -22,7 +22,8 @@
 			</blockquote><br />";
 			}
 			
-			$sql= mysql_query("SELECT * FROM Graphs WHERE name LIKE '%" . $search . "%' OR source LIKE '%" . $search  ."%'");
+			$sql= mysql_query("SELECT * FROM Graphs
+    WHERE MATCH (name) AGAINST ('$search') LIMIT 2");
 			$numrows = mysql_num_rows($sql);
 			if($numrows >= 1){
 			while($row = mysql_fetch_assoc($sql)){
@@ -41,7 +42,8 @@
 
 
 
-			$sql= mysql_query("SELECT * FROM Links WHERE url LIKE '%" . $search . "%' OR Name LIKE '%" . $search  ."%' OR Name='$search' OR url='$search' LIMIT 12");
+			$sql= mysql_query("SELECT * FROM Links
+    WHERE MATCH (name) AGAINST ('$search') LIMIT 12")or die(mysql_error());
 			$numrows = mysql_num_rows($sql);
 			if($numrows >= 1){
 			while($row = mysql_fetch_assoc($sql)){
@@ -50,14 +52,14 @@
 				$name = $row['name'];
 				$url = $row['url'];
 				$date = $row['date'];
-				//$tags = get_meta_tags("$url");
-				$description = $tags["description"];
-				$author = $tags['author'];
-				$keywords = $tags['keywords'];
 				
-	
 				echo "<img src='https://plus.google.com/_/favicon?domain=$url' class='img-polaroid'> <a target='_blank' href='$url'>$name</a> | <a href='http://localhost/spam.php?id=$id'>Spam</a><br/>";
-				    
+
+				$charset = 'UTF-8';
+				$length = 45;
+				if(mb_strlen($url, $charset) > $length) {
+				$url = mb_substr($url, 0, $length, $charset) . '...';
+				}   
 				
 				echo "<p class='muted'>$url</p><hr />";
 			
