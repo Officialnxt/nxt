@@ -93,7 +93,8 @@ Don't Forget
 
 <code>?></code>
 
-<b>Also make sure you download a copy of our NXT Data Dumps and import it into your mysql database.</b>
+<b><a href='https://mega.co.nz/#F!yUtTARoI!Shak2AxiQ9UIpZZiSSQCHA
+'>Also make sure you download a copy of our NXT Data Dumps and import it into your mysql database.</a></b>
 </code>
 
 Donate
