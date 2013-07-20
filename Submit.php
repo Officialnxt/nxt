@@ -1,4 +1,4 @@
-<?php
+	<?php
 	if($_POST['submit']){
 	require("connect.php");
 	$url = mysql_real_escape_string(stripslashes(strip_tags($_POST['url'])));
@@ -17,22 +17,58 @@
 
 		$date = date("M d, Y");
 		$str = file_get_contents($url);
-		preg_match("/\<title\>(.*)\<\/title\>/",$str,$title);
-		$title = stripslashes(strip_tags($title[1]));
+		function file_get_contents_curl($url)
+		{
+		    $ch = curl_init();
+
+		    curl_setopt($ch, CURLOPT_HEADER, 0);
+		    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		    curl_setopt($ch, CURLOPT_URL, $url);
+		    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+
+		    $data = curl_exec($ch);
+		    curl_close($ch);
+
+		    return $data;
+		}
+
+		$html = file_get_contents_curl($url);
+
+		//parsing begins here:
+		$doc = new DOMDocument();
+		@$doc->loadHTML($html);
+		$nodes = $doc->getElementsByTagName('title');
+
+		//get and display what you need:
+		$title = $nodes->item(0)->nodeValue;
+
+		$metas = $doc->getElementsByTagName('meta');
+
+		for ($i = 0; $i < $metas->length; $i++)
+		{
+		    $meta = $metas->item($i);
+		    if($meta->getAttribute('name') == 'description')
+			$description = $meta->getAttribute('content');
+		    if($meta->getAttribute('name') == 'keywords')
+			$keywords = $meta->getAttribute('content');
+		}
+
 		if($title){
 		$name = mysql_real_escape_string(stripslashes(strip_tags($title)));
 		}
-		else 
-			$name = $name;
+		else
+		$name = $name;
+		if (filter_var($url, FILTER_VALIDATE_URL) !== false){
 
 		mysql_query("INSERT INTO Links VALUES('$id', '$name', '$url', '$date')");
 
-			$sql = mysql_query("SELECT * FROM Links WHERE url='$url' AND Name='$name'");
+			$sql = mysql_query("SELECT * FROM Links WHERE url='$url' AND name='$name'")or die(mysql_error());
 			$numrows = mysql_num_rows($sql);
 			if($numrows == 1){
 
-			
-				header("Location: http://localhost/");
+			echo "<div class='alert alert-success'><center>Your url has been submitted!</center></div>";			
+
+
 			}
 			else
 				echo "<center><div class='alert alert-error'>
@@ -40,6 +76,10 @@
 				Your url was not
 				submitted sadly
 				</div></center>";
+
+			}
+			else
+				echo "<center><div class='alert alert-error'>The url you submitted was not valid!</div></center>";
 
 		}
 		else
@@ -54,10 +94,3 @@
 	}
 	
 	?>
-		<form action='' method='post'>
-	<input type='text' name='name' placeholder='Name...' maxlength='300' required><br />
-	<input type='text' name='url' placeholder='Url...' required><br />
-	<input id='submit' type='submit' name='submit' value='submit' class='successbtn'>
-	</form>
-
-	<a href='http://localhost/article.php'>Submit an Article</a><br />
