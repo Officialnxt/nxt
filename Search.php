@@ -3,12 +3,12 @@
 session_start();
 
 //include functions
-include_once ("include/commonfuncs.php");
-
-require_once('settings/db_search.php'); 
-require_once('settings/conf.php');
-require_once("include/searchfuncs.php");
-include_once ("settings/en-language.php");
+  include_once ("sphider/include/commonfuncs.php");
+  
+  require_once('sphider/settings/db_search.php'); 
+  require_once('sphider/settings/conf.php');
+  require_once("sphider/include/searchfuncs.php");
+  include_once ("sphider/settings/en-language.php");
 
 $search =1;
 
@@ -52,12 +52,6 @@ if (get_magic_quotes_gpc()==1) {
 	$query = stripslashes($query);
 } 
 
-  include_once ("sphider/include/commonfuncs.php");
-  
-  require_once('sphider/settings/db_search.php'); 
-  require_once('sphider/settings/conf.php');
-  require_once("sphider/include/searchfuncs.php");
-  include_once ("sphider/settings/en-language.php");
    if ($query !='') {
    include_once ("include/websfunctions.php");
    }
