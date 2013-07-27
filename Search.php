@@ -53,7 +53,7 @@ if (get_magic_quotes_gpc()==1) {
 } 
 
    if ($query !='') {
-   include_once ("include/websfunctions.php");
+   include_once ("sphider/include/websfunctions.php");
    }
    
    mysql_close($link);
