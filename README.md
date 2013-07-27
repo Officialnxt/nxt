@@ -16,7 +16,7 @@ Copyright 2013 NXT
    limitations under the License.
 
 
-NXT Search is a search engine which is based off of your links. You can easily subit your own content to the database or even your company's content. NXT Search is free and open to everyone. NXT is also open sourced, meaning developers can download the NXT source code from Github.
+NXT Search is a search engine which is based off of Sphider & your links. You can easily subit your own content to the database or even your company's content. NXT Search is free and open to everyone. NXT is also open sourced, meaning developers can download the NXT source code from Github.
 
 
 Donate
