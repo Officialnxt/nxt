@@ -4,6 +4,8 @@ NXT
 NXT Search is currently a search engine that allows users to easily search from products that can be bought with Bitcoins.
 Nxt was built using primarily open source tools such as Apache, Mysql, & Apache.
 
+<a href='https://github.com/Officialnxt/NXTTranslate' target='_blank'>NXT Translate</a>
+
 Tools used by NXT
 ===
 
