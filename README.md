@@ -30,3 +30,7 @@ or to many subscribers. It is decentralized and trustless, meaning that you need
 
 <a href='http://www.cyanogenmod.org/' target='_blank'>Cyanogenmod</a> - CyanogenMod (pronounced sigh-AN-oh-jen-mod), is a customized, aftermarket firmware 
 distribution for several Android devices.
+
+<a href='https://wikimediafoundation.org/wiki/Home' target='_blank'>Wikimedia Foundation</a> - The Wikimedia Foundation, Inc. is a nonprofit charitable organization dedicated
+to encouraging the growth, development and distribution of free, multilingual, educational content, and to providing the full content of these wiki-based projects to the public free of charge. 
+<a href='https://www.wikipedia.org/' target='_blank'>Wikipedia</a>, <a href='http://wikitravel.org/en/Main_Page' target='_blank'>Wikitravel</a>, <a href='https://www.wikivoyage.org/' target='_blank'>Wikivoyage</a>.
